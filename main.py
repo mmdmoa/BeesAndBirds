@@ -1,9 +1,16 @@
+import pygame as pg;from pygame.locals import *
+import random,time
+import os
+from touch_keys import TouchKeys
 
-import pygame as pg;from pygame.locals import *;
-import random,time;
-#producing the map generation part is halfly done and it almost killed me
-#but is satisfies me now! it worthed it ! 
-#let's make a backup for this 
+IS_ANDROID = 'ANDROID_ARGUMENT' in os.environ
+
+# I cant believe it works considering how dirty it is :/
+# I lost my sanity lol
+
+
+CWD = os.path.abspath(".")+"/"
+
 
 def newScaleByWidth(surface,newWidth):
 
@@ -33,8 +40,8 @@ class character:
 
 class clouds:
 	def init():
-		cloud0=newScaleByWidth(pg.image.load('oimages/cloud0.png'),200)
-		cloud1=newScaleByWidth(pg.image.load('oimages/cloud1.png'),200)
+		cloud0=newScaleByWidth(pg.image.load(CWD+'oimages/cloud0.png'),200)
+		cloud1=newScaleByWidth(pg.image.load(CWD+'oimages/cloud1.png'),200)
 
 		clouds.surfaces=[cloud0,cloud1]
 		clouds.Dic={}
@@ -126,15 +133,15 @@ class person:
 	def init():
 		person.font = pg.font.SysFont('comic sans ms',70)
 
-		person.person1 = pg.image.load('oimages/bee0.png')
-		person.person2 = pg.image.load('oimages/bee1.png')
+		person.person1 = pg.image.load(CWD+'oimages/bee0.png')
+		person.person2 = pg.image.load(CWD+'oimages/bee1.png')
 		# person3 = newScaleByWidth(pg.image.load('oimages/person.3.png'),51)
 		# person4 = newScaleByWidth(pg.image.load('oimages/person.4.png'),51)
 		person.person3=pg.transform.flip(person.person1,1,0)
 		person.person4=pg.transform.flip(person.person2,1,0)
 
-		person.person5 = pg.image.load('oimages/bee2.png')
-		person.person6 = pg.image.load('oimages/bee3.png')
+		person.person5 = pg.image.load(CWD+'oimages/bee2.png')
+		person.person6 = pg.image.load(CWD+'oimages/bee3.png')
 		# person3 = newScaleByWidth(pg.image.load('oimages/person.3.png'),51)
 		# person4 = newScaleByWidth(pg.image.load('oimages/person.4.png'),51)
 		person.person7=pg.transform.flip(person.person5,1,0)
@@ -632,40 +639,40 @@ class Map:
 	def init():
 		Map.id = 0;
 
-		dirt0 =newScaleByWidth(pg.image.load('oimages/dirt0.png'),51)
-		dirt1 =newScaleByWidth(pg.image.load('oimages/dirt1.png'),51)
-		dirt2 =newScaleByWidth(pg.image.load('oimages/dirt2.png'),51)
-		dirt3 =newScaleByWidth(pg.image.load('oimages/dirt3.png'),51)
-		dirt4 =newScaleByWidth(pg.image.load('oimages/dirt4.png'),51)
-		dirt5 =newScaleByWidth(pg.image.load('oimages/dirt5.png'),51)
+		dirt0 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt0.png'),51)
+		dirt1 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt1.png'),51)
+		dirt2 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt2.png'),51)
+		dirt3 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt3.png'),51)
+		dirt4 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt4.png'),51)
+		dirt5 =newScaleByWidth(pg.image.load(CWD+'oimages/dirt5.png'),51)
 
 		Map.dirts = 		{'s':[dirt0,dirt1],
 						'm':[dirt2,dirt3],
 						'e':[dirt4,dirt5]}
 
-		stone0 =newScaleByWidth(pg.image.load('oimages/stone0.png'),51)
-		stone1 =newScaleByWidth(pg.image.load('oimages/stone1.png'),51)
-		stone2 =newScaleByWidth(pg.image.load('oimages/stone2.png'),51)
-		stone3 =newScaleByWidth(pg.image.load('oimages/stone3.png'),51)
-		stone4 =newScaleByWidth(pg.image.load('oimages/stone4.png'),51)
-		stone5 =newScaleByWidth(pg.image.load('oimages/stone5.png'),51)
+		stone0 =newScaleByWidth(pg.image.load(CWD+'oimages/stone0.png'),51)
+		stone1 =newScaleByWidth(pg.image.load(CWD+'oimages/stone1.png'),51)
+		stone2 =newScaleByWidth(pg.image.load(CWD+'oimages/stone2.png'),51)
+		stone3 =newScaleByWidth(pg.image.load(CWD+'oimages/stone3.png'),51)
+		stone4 =newScaleByWidth(pg.image.load(CWD+'oimages/stone4.png'),51)
+		stone5 =newScaleByWidth(pg.image.load(CWD+'oimages/stone5.png'),51)
 
 		Map.stones = {'s':[stone2,stone3],
 						'm':[stone0,stone1],
 						'e':[stone4,stone5]}
 
-		dirtStone0 =newScaleByWidth(pg.image.load('oimages/dirtStone0.png'),51)
-		dirtStone1 =newScaleByWidth(pg.image.load('oimages/dirtStone1.png'),51)
+		dirtStone0 =newScaleByWidth(pg.image.load(CWD+'oimages/dirtStone0.png'),51)
+		dirtStone1 =newScaleByWidth(pg.image.load(CWD+'oimages/dirtStone1.png'),51)
 
 		Map.dirtStones={'m':[dirtStone0,dirtStone1]}
 
 
-		water0 =newScaleByWidth(pg.image.load('oimages/water0.png'),51)
-		water1 =newScaleByWidth(pg.image.load('oimages/water1.png'),51)
-		water2 =newScaleByWidth(pg.image.load('oimages/water2.png'),51)
-		water3 =newScaleByWidth(pg.image.load('oimages/water3.png'),51)
-		water4 =newScaleByWidth(pg.image.load('oimages/water4.png'),51)
-		water5 =newScaleByWidth(pg.image.load('oimages/water5.png'),51)
+		water0 =newScaleByWidth(pg.image.load(CWD+'oimages/water0.png'),51)
+		water1 =newScaleByWidth(pg.image.load(CWD+'oimages/water1.png'),51)
+		water2 =newScaleByWidth(pg.image.load(CWD+'oimages/water2.png'),51)
+		water3 =newScaleByWidth(pg.image.load(CWD+'oimages/water3.png'),51)
+		water4 =newScaleByWidth(pg.image.load(CWD+'oimages/water4.png'),51)
+		water5 =newScaleByWidth(pg.image.load(CWD+'oimages/water5.png'),51)
 
 		waters = [water0,water1,water2,
 					water3,water4,water5]
@@ -674,19 +681,19 @@ class Map:
 						'm':waters.copy(),
 						'e':[stone4,stone5]}
 
-		fire0 =newScaleByWidth(pg.image.load('oimages/fire0.png'),51)
-		fire1 =newScaleByWidth(pg.image.load('oimages/fire1.png'),51)
-		fire2 =newScaleByWidth(pg.image.load('oimages/fire2.png'),51)
-		fire3 =newScaleByWidth(pg.image.load('oimages/fire3.png'),51)
-		fire4 =newScaleByWidth(pg.image.load('oimages/fire4.png'),51)
-		fire5 =newScaleByWidth(pg.image.load('oimages/fire5.png'),51)
+		fire0 =newScaleByWidth(pg.image.load(CWD+'oimages/fire0.png'),51)
+		fire1 =newScaleByWidth(pg.image.load(CWD+'oimages/fire1.png'),51)
+		fire2 =newScaleByWidth(pg.image.load(CWD+'oimages/fire2.png'),51)
+		fire3 =newScaleByWidth(pg.image.load(CWD+'oimages/fire3.png'),51)
+		fire4 =newScaleByWidth(pg.image.load(CWD+'oimages/fire4.png'),51)
+		fire5 =newScaleByWidth(pg.image.load(CWD+'oimages/fire5.png'),51)
 
 		Map.fires = [fire0,fire1,fire2,
 					fire3,fire4,fire5]
 
 
-		flower0 =newScaleByHeight(pg.image.load('oimages/flower0.png'),51)
-		flower1 =newScaleByHeight(pg.image.load('oimages/flower1.png'),51)
+		flower0 =newScaleByHeight(pg.image.load(CWD+'oimages/flower0.png'),51)
+		flower1 =newScaleByHeight(pg.image.load(CWD+'oimages/flower1.png'),51)
 
 		Map.flowers=[flower0,flower1]
 
@@ -834,8 +841,13 @@ class Map:
 					roosterInit[1]=0;
 				
 				newChunk = Map.getChunk(width,height,roosterInit)
-				newPos = [random.randint(vrr[0],vrr[0]+vrr[2]-newChunk[1][0]*50),
-							 random.randint(vrr[1],vrr[1]+vrr[3]-newChunk[1][1]*50)]
+
+				try:
+					newPos = [random.randint(vrr[0],vrr[0]+vrr[2]-newChunk[1][0]*50),
+								 random.randint(vrr[1],vrr[1]+vrr[3]-newChunk[1][1]*50)]
+				except ValueError as v:
+					return print(v)
+
 
 				Map.rects.append([[newPos[0],newPos[1],newChunk[1][0]*50,
 								newChunk[1][1]*50],Map.id])
@@ -1194,12 +1206,24 @@ class log:
 dircs = []
 # ret=0
 showLog = 0;
+events = []
 def getEvents():
+	global events
 	global run;global dircs;global showLog
 	# if ret:
 	# 	person.score+=1
 
-	for i in pg.event.get():
+	events = pg.event.get()
+	if IS_ANDROID:
+		TK.get_events(events)
+		if TK.is_commanding:
+			dircs.clear()
+			dircs.extend(list(TK.command))
+			person.case = 'nitro'
+		else:
+			dircs.clear()
+
+	for i in events:
 		if i.type==QUIT or i.type==KEYDOWN and i.key==K_ESCAPE:
 			run=0
 
@@ -1229,16 +1253,16 @@ def getEvents():
 		if i.type==KEYUP:
 			# if i.key==K_RETURN:
 			# 	ret = 0
-			if i.key in [K_UP,K_w]:
+			if i.key in [K_UP,K_w] and 'u' in dircs:
 				dircs.remove('u')
 
-			if i.key in [K_DOWN,K_s]:
+			if i.key in [K_DOWN,K_s] and 'd' in dircs:
 				dircs.remove('d')
 
-			if i.key in [K_RIGHT,K_d]:
+			if i.key in [K_RIGHT,K_d] and 'r' in dircs:
 				dircs.remove('r')
 
-			if i.key in [K_LEFT,K_a]:
+			if i.key in [K_LEFT,K_a] and 'l' in dircs:
 				dircs.remove('l')
 
 
@@ -1246,6 +1270,7 @@ def getEvents():
 				person.case='normal'
 
 def checkEvents():
+	TK.check_events()
 	objects.check()
 	#character.check()
 	person.check()
@@ -1256,6 +1281,8 @@ def checkEvents():
 	log.check()
 
 def upDrawer():
+	global final_fps
+
 	screen.fill(bg)
 	viewPort.draw()
 	Map.draw()
@@ -1266,22 +1293,54 @@ def upDrawer():
 	clouds.draw()
 	
 	log.draw()
+	if IS_ANDROID:
+		TK.render()
+
+	text = get_fps_text()
+	rect = text.get_rect()
+	rect.x = screen.get_width() - rect.w
+	rect.y = screen.get_height() - rect.h
+	screen.blit(text,rect)
+
+
 
 	pg.display.update()
 	clock.tick(fps)
+	final_fps = clock.get_fps()
 
 
-run=1
-
+final_fps = 0
 bg=(150,200,255)
 
 pg.init()
-rsize = pg.display.get_desktop_sizes()[0]
-X=rsize[0];Y=rsize[1]
-flags = FULLSCREEN
 
+font = pg.font.SysFont("monospace",30)
+run=1
+
+def get_fps_text():
+	return font.render(f"FPS: {round(final_fps)}",False,"black")
+
+
+rsize = pg.display.get_desktop_sizes()[0]
+rsize = [1400,700]
+
+
+# rsize = [800,640]
+X=rsize[0]
+Y=rsize[1]
+if X > Y:
+	X = int(X*0.9)
+else:
+	Y = int(Y*0.9)
+
+
+
+flags = SCALED | FULLSCREEN
 screen=pg.display.set_mode((X,Y),flags)
-clock=pg.time.Clock();fps=30;
+TK = TouchKeys(screen)
+
+clock=pg.time.Clock();
+fps=30;
 character.init();person.init();bee.init()
 objects.init();
 viewPort.init();
